@@ -22,6 +22,7 @@
 #define GPIO_ROTARY_B    3
 #define GPIO_ALERT       6
 
+#define OVER_CURRENT_PROTECT     8 // [A]
 
 
 
@@ -227,7 +228,7 @@ void setup()
   g_iPowerMon.SetSamplingDuration( 64 );
 
   // INA226 - Over current alert
-  double alert_ampare = 4;
+  double alert_ampare = OVER_CURRENT_PROTECT;
   g_iPowerMon.SetAlertFunc( PMoni_INA226::ALERT_SHUNT_OVER_VOLT, (int)(alert_ampare / g_iPowerMon.GetAmpereOf1LSB()) );
   pinMode(GPIO_ALERT, INPUT);
   attachInterrupt(GPIO_ALERT , OnAlert, FALLING);
