@@ -1,10 +1,13 @@
 #ifndef __CTRL_I2C_H_INCLUDED__
 #define __CTRL_I2C_H_INCLUDED__
 
+#include <cstdint>
+#include <initializer_list>
+
 class ctrl_i2c
 {
 public:
-	ctrl_i2c( int addr ) : m_addr(addr)
+	ctrl_i2c( uint8_t addr ) : m_addr(addr)
 	{
 	}
 
@@ -17,6 +20,11 @@ public:
 		}
 		Wire.endTransmission();
 		return  true;
+	}
+
+	bool	write(std::initializer_list<const unsigned char> data)
+	{
+		return	write( data.begin(), data.size() );
 	}
 
 	bool    read( unsigned char * data, int size )
@@ -32,7 +40,7 @@ public:
 	}
 
 private:
-	const int     m_addr;
+	const uint8_t     m_addr;
 };
 
 #endif
